@@ -1,0 +1,33 @@
+[0m[[0m[0mdebug[0m] [0m[0mPackaging D:\CODE\Chisel\target\scala-2.12\chisel_2.12-0.1.0-SNAPSHOT.jar ...[0m
+[0m[[0m[0mdebug[0m] [0m[0mInput file mappings:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	empty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\empty[0m
+[0m[[0m[0mdebug[0m] [0m[0m	empty\Add$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\empty\Add$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	empty\Add.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\empty\Add.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	empty\AddMain$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\empty\AddMain$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	empty\AddMain$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\empty\AddMain$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	empty\AddMain.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\empty\AddMain.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	empty\AddTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\empty\AddTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	madd[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\madd[0m
+[0m[[0m[0mdebug[0m] [0m[0m	madd\StridePrefetcher$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\madd\StridePrefetcher$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	madd\StridePrefetcher$List.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\madd\StridePrefetcher$List.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	madd\StridePrefetcher.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\madd\StridePrefetcher.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	madd\StridePrefetcherSpec.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\madd\StridePrefetcherSpec.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	madd\StridePrefetcherTester$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\madd\StridePrefetcherTester$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	madd\StridePrefetcherTester$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\madd\StridePrefetcherTester$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	madd\StridePrefetcherTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	  D:\CODE\Chisel\target\scala-2.12\classes\madd\StridePrefetcherTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mDone packaging.[0m

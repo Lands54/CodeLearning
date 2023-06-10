@@ -1,0 +1,10 @@
+kuang_livenote/
+
+git/
+
+.vscode/
+
+*.exe
+*.jar
+*.log
+*.class
