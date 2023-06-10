@@ -1,15 +1,9 @@
 kuang_livenote/
-
-/git
-
+git/
 .vscode/
+Chisel/.bsp
+Chisel/target
 
 *.exe
 *.jar
-*.log
 *.class
-.history3
-Chisel/
-!Chisel/src
-!Chisel/project/
-!Chisel/build.sbt
