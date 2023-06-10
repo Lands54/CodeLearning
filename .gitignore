@@ -8,5 +8,7 @@ kuang_livenote/
 *.jar
 *.log
 *.class
+.history3
 Chisel/
 !Chisel/src
+!Chisel/project
