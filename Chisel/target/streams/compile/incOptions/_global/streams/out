@@ -1,17 +1,38 @@
 [0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = D:\CODE\Chisel\target\scala-2.12\classes.bak[0m
 [0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AddTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AddMain$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcher$$anon$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherSpec.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AddMain.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AddMain$delayedInit$body.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Add$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcher.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcher$List.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Add.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AddTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AddMain$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcher$$anon$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherSpec.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AddMain.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AddMain$delayedInit$body.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Add$$anon$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcher.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcher$List.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Add.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mRegistering generated classes:[0m
-[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcher$$anon$1.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherSpec.class[0m
-[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester$.class[0m
 [0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester$delayedInit$body.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcherTester$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcher.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	StridePrefetcher$List.class[0m
 [0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: D:\CODE\Chisel\target\scala-2.12\classes.bak[0m

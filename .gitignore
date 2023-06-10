@@ -1,6 +1,6 @@
 kuang_livenote/
 
-git/
+/git
 
 .vscode/
 
@@ -8,3 +8,5 @@ git/
 *.jar
 *.log
 *.class
+Chisel/
+!Chisel/src
