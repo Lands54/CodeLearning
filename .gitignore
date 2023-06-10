@@ -11,4 +11,5 @@ kuang_livenote/
 .history3
 Chisel/
 !Chisel/src
-!Chisel/project
+!Chisel/project/
+!Chisel/build.sbt
