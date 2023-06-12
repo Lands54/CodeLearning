@@ -2,8 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from time import sleep
 sleep(3)
-account_number = "21012217"
-password_number = "19891113Qq@@"
+account_number = "account"
+password_number = "password"
 site = webdriver.Chrome("D:\EnvironMent\webdriver\chromedriver.exe")
 site.get("http://10.21.221.98/a79.htm")
 side=site.find_element(By.XPATH,"/html/body/div/div/div[3]/div[1]/div/div[2]/div[1]/div/select/option[2]")

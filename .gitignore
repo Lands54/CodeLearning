@@ -3,6 +3,7 @@ git/
 .vscode/
 Chisel/.bsp
 Chisel/target
+Chisel/test_run_dir
 #file
 *.exe
 *.jar

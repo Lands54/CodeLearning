@@ -6,12 +6,7 @@ import chisel3.stage.{ChiselStage, ChiselGeneratorAnnotation}
 
 class StridePrefetcher(val addressWidth: Int, val pcWidth: Int) extends Module {
   
-  val io = IO(new Bundle {
-    val pc = Input(UInt(pcWidth.W))
-    val address = Input(UInt(addressWidth.W))
-    val prefetch_address = Output(UInt(addressWidth.W))
-    val prefetch_valid = Output(Bool())
-  })
+  val io = IO(new StridePrefetcherIO)
   
   class List extends Bundle {
     val PCS = UInt(pcWidth.W)
