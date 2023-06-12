@@ -8,17 +8,20 @@ class StridePrefetcherTester(dut:StridePrefetcher)extends PeekPokeTester(dut) {
   var acc = BigInt(0)
   var ful = BigInt(0)
   var count = BigInt(0)
-  for(i <-0.U to 40959.U by 4.U)
+  val num_gap_1 = 4.U
+  val num_gap_2 = 8.U
+  poke(dut.io.pc,0)
+  poke(dut.io.address,0)
+  for(i <-num_gap_1 to 40959.U by num_gap_1)
   {
-  poke(dut.io.pc,i)
-  poke(dut.io.address,i)
   if(peek(dut.io.prefetch_valid)==1){
     ful = ful + 1
-    if(peek(dut.io.prefetch_address)==i+4){
+    if(peek(dut.io.prefetch_address)==i){
     acc = acc + 1
-  }
-  }
+  }}
   step(1)
+  poke(dut.io.pc,i)
+  poke(dut.io.address,i)
   count = count+1
   }
   println("0,4,8..ACCURATE is %f%%(num:%d)".format((acc.toDouble/ful.toDouble)*100,count))
@@ -26,18 +29,18 @@ class StridePrefetcherTester(dut:StridePrefetcher)extends PeekPokeTester(dut) {
   var acct = BigInt(0)
   var fult = BigInt(0)
   var countt = BigInt(0)
-  for(i <-0.U to 40959.U by 8.U)
+  poke(dut.io.pc,0)
+  poke(dut.io.address,0)
+  for(i <-num_gap_2 to 40959.U by num_gap_2)
   {
-  poke(dut.io.pc, i)
-  poke(dut.io.address,i)
-
   if(peek(dut.io.prefetch_valid)==1){
     fult = fult + 1
-    if(peek(dut.io.prefetch_address)==i+8){
+    if(peek(dut.io.prefetch_address)==i){
     acct = acct + 1
-  }
-  }
+  }}
   step(1)
+  poke(dut.io.pc,i)
+  poke(dut.io.address,i)
   countt = countt+1
   }
   println("0,8,16..ACCURATE is %f%%(num:%d)".format((acct.toDouble/fult.toDouble)*100,countt))

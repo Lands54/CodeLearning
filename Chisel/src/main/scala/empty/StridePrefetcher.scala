@@ -6,7 +6,7 @@ import chisel3.stage.{ChiselStage, ChiselGeneratorAnnotation}
 
 class StridePrefetcher(val addressWidth: Int, val pcWidth: Int) extends Module {
   
-  val io = IO(new StridePrefetcherIO)
+  val io = IO(new StridePrefetcherIO(addressWidth,pcWidth))
   
   class List extends Bundle {
     val PCS = UInt(pcWidth.W)
@@ -33,7 +33,7 @@ class StridePrefetcher(val addressWidth: Int, val pcWidth: Int) extends Module {
   when(count > 0.U) {
     data_in.PDS := data_in.ADS - file(count-1.U).ADS
   }.otherwise {
-    data_in.PDS := 4.U
+    data_in.PDS := data_in.ADS - file(1023).ADS
   }
 
   file(count) := data_in
@@ -43,12 +43,17 @@ class StridePrefetcher(val addressWidth: Int, val pcWidth: Int) extends Module {
       io.prefetch_address := data_in.ADS + data_in.PDS
       io.prefetch_valid := true.B
     }.otherwise {
-      io.prefetch_address := data_in.ADS + data_in.PDS
+      io.prefetch_address := 0.U
       io.prefetch_valid := false.B
     }
   }.otherwise {
-    io.prefetch_address := 4.U
+    when(data_in.PDS === file(1023).PDS){
+    io.prefetch_address := data_in.ADS + data_in.PDS
     io.prefetch_valid := true.B
+    }.otherwise{
+      io.prefetch_address := 0.U
+      io.prefetch_valid := false.B
+    }
   }
   count := count + 1.U
 }
