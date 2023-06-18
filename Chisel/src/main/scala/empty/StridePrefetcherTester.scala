@@ -9,7 +9,7 @@ class StridePrefetcherTester(dut:StridePrefetcher)extends PeekPokeTester(dut) {
   var ful = BigInt(0)
   var count = BigInt(0)
   val num_gap_1 = 4.U
-  val num_gap_2 = 8.U
+  val num_gap_2 = 8.U 
   poke(dut.io.pc,0)
   poke(dut.io.address,0)
   for(i <-num_gap_1 to 40959.U by num_gap_1)
