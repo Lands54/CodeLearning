@@ -4,8 +4,12 @@ import chisel3.util._
 import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
 import scala.util.Random
 import java.io._
-class T_StridePrefetcherTester(dut:StridePrefetcher)extends PeekPokeTester(dut){
-   class PrefetcherDetecter(Input_PC: Array[Int], Input_Address: Array[Int]) {
+import scala.collection.mutable.ArrayBuffer
+class T_StridePrefetcherTester(dut:StridePrefetcher,Times:Int,Control_Pc:Int,Control_ad:Int)extends PeekPokeTester(dut){
+  private var Array_PC = Produce_Array(0)
+  private var Array_Adddress = Produce_Array(0)
+  private val PrefetcherDetecter: PrefetcherDetecter = new PrefetcherDetecter(Array_PC, Array_Adddress)
+  class PrefetcherDetecter(Input_PC: Array[Int], Input_Address: Array[Int]) {
     private var Undetected_Array = Input_PC.zip(Input_Address)
     private var prefetch_address: BigInt = 0
     private var prefetch_vaild: Boolean = false
@@ -75,6 +79,9 @@ class T_StridePrefetcherTester(dut:StridePrefetcher)extends PeekPokeTester(dut){
     def print_Result(): Unit = {
       print("(FILLRATE,ACCURATE)=" + Output_Result + "\n")
     }
+    def PRINT(Control_Pc:Int,Control_Ad:Int): String = {
+      ("StridePrefetcher:Mode :"+Control_Pc+"|"+Control_Ad)+("(FILLRATE,ACCURATE)=" + Output_Result + "\n")
+    }
     def Output_Table(): Unit = {
       print(Table)
       print("(FILLRATE,ACCURATE)=" + Output_Result + "\n")
@@ -111,39 +118,66 @@ class T_StridePrefetcherTester(dut:StridePrefetcher)extends PeekPokeTester(dut){
       }
     }
   }*/
+  private def Tree_Array(Length: Int, Head: Int): Array[Int] = {
+    var buffer = new ArrayBuffer[Int](64)
+    buffer += Head
+    for (i <- 0 until Length) {
+      buffer += (2 * (buffer(i) - Head) + Random.nextInt(2) + 1)
+    }
+    buffer.toArray
+  }
+  private def Linear_Recurrence_Array(Pc_Array: Array[Int], Range: Int, Head: Int): Array[Int] = {
+    var Out_Array: Array[Int] = Array[Int](Pc_Array.length)
+    val Pc: Int = 0
+    var RandomInt: Int = 0
+    for (Pc <- Pc_Array) {
+      RandomInt = Random.nextInt(Range) - Range / 2 + Pc + Head
+      if (RandomInt < 0) {
+        Out_Array = Out_Array :+ 0
+      } else {
+        Out_Array = Out_Array :+ RandomInt
+      }
+    }
+    Out_Array
+  }
   private def Produce_Array(Control: Int): Array[Int] = {
     Control match {
       case 0 => Sequential_pattern(64)
       case 1 => Strided_pattern(64, 192, 2)
       case 2 => Interleaved_Pattern(Strided_pattern(0, 128, 2), Strided_pattern(52, 500, 7))
       case 3 => RandomArray(64, 0, 128)
+      case 4 => Linear_Recurrence_Array(Sequential_pattern(64), 3, 0)
+      case 5 => Tree_Array(16, 0)
+      case _ => Array.fill(65)(0)
     }
   }
-
-  def DoingTest(Times: Int, Control: Int): Unit = {
-    print("StridePrefetcher:Mode ",Control)
-    Array_PC = Produce_Array(Control)
-    Array_Adddress = Produce_Array(Control)
+  def DoingTest(Times: Int, Control_Pc: Int, Control_Ad: Int): Unit = {
+    print("StridePrefetcher:Mode :" + Control_Pc + "|" + Control_Ad)
+    PrefetcherDetecter.init()
+    PrefetcherDetecter.incount()
+    Array_PC = Produce_Array(Control_Pc)
+    Array_Adddress = Produce_Array(Control_Ad)
     PrefetcherDetecter.ChangeArray(Array_PC, Array_Adddress)
     PrefetcherDetecter.Tester(Times)
     //PrefetcherDetecter.Output_Table()
     PrefetcherDetecter.print_Result()
-    PrefetcherDetecter.init()
-    PrefetcherDetecter.incount()
   }
-
+  def Main(Times: Int,Control_Pc:Int,Control_ad:Int): Unit = {
+    val Record_File = new File("Record_StridePrefetcher.txt")
+    val Writer = new BufferedWriter(new FileWriter(Record_File))
+    DoingTest(Times, Control_Pc, Control_ad:Int)
+    Writer.write(PrefetcherDetecter.Table)
+    Writer.flush()
+  }
+  def pr(Control_Pc:Int,Control_ad:Int):String = {
+    PrefetcherDetecter.PRINT(Control_Pc,Control_ad)
+  }
+  Main(Times,Control_Pc,Control_ad)
+}
+class T_MarkovPrefetcherTester(dut:MarkovPrefetcher,Times:Int,Control_Pc:Int,Control_ad:Int)extends PeekPokeTester(dut){
   private var Array_PC = Produce_Array(0)
   private var Array_Adddress = Produce_Array(0)
   private val PrefetcherDetecter: PrefetcherDetecter = new PrefetcherDetecter(Array_PC, Array_Adddress)
-  val Record_File = new File("Record_StridePrefetcher.txt")
-  val Writer = new FileWriter(Record_File,false)
-  DoingTest(2, 0)
-  DoingTest(2, 1)
-  DoingTest(2, 2)
-  DoingTest(3, 3)
-  Writer.write(PrefetcherDetecter.Table)
-}
-class T_MarkovPrefetcherTester(dut:MarkovPrefetcher)extends PeekPokeTester(dut){
   private class PrefetcherDetecter(Input_PC: Array[Int], Input_Address: Array[Int]) {
     private var Undetected_Array = Input_PC.zip(Input_Address)
     private var prefetch_address: BigInt = 0
@@ -213,7 +247,9 @@ class T_MarkovPrefetcherTester(dut:MarkovPrefetcher)extends PeekPokeTester(dut){
     private def Output_Result: (Double, Double) = {
       (Fillrate,Accurate)
     }
-
+    def PRINT(Control_Pc: Int, Control_Ad: Int): String = {
+      ("MarkovPrefetcher:Mode :" + Control_Pc + "|" + Control_Ad) + ("(FILLRATE,ACCURATE)=" + Output_Result + "\n")
+    }
     def print_Result(): Unit = {
       print("(FILLRATE,ACCURATE)=" + Output_Result + "\n")
     }
@@ -225,11 +261,9 @@ class T_MarkovPrefetcherTester(dut:MarkovPrefetcher)extends PeekPokeTester(dut){
   private def Sequential_pattern(End: Int): Array[Int] = {
     Strided_pattern(0, End, 1)
   }
-
   private def Strided_pattern(Begin: Int, End: Int, Num_Gap: Int): Array[Int] = {
     Range(Begin, End + Num_Gap, Num_Gap).toArray
   }
-
   private def Interleaved_Pattern(Part_Array_1: Array[Int], Part_Array_2: Array[Int]): Array[Int] = {
     val maxLength = math.max(Part_Array_1.length, Part_Array_2.length)
     val pattern = for {
@@ -241,12 +275,10 @@ class T_MarkovPrefetcherTester(dut:MarkovPrefetcher)extends PeekPokeTester(dut){
     }
     pattern.flatten.toArray
   }
-
   private def RandomArray(length: Int, minValue: Int, maxValue: Int): Array[Int] = {
     val random = new Random()
     Array.fill(length + 1)(random.nextInt(maxValue - minValue + 1) + minValue)
   }
-
   /*  private def Test_Register(): Unit = {
     print("|   Vaild|  Amount| Purpose|  Origin|Num|\n")
     for (i <- 0 until 128 * 4) {
@@ -257,40 +289,67 @@ class T_MarkovPrefetcherTester(dut:MarkovPrefetcher)extends PeekPokeTester(dut){
       }
     }
   }*/
+  private def Tree_Array(Length: Int, Head: Int): Array[Int] = {
+    var buffer = new ArrayBuffer[Int](64)
+    buffer += Head
+    for (i <- 0 until Length) {
+      buffer += (2 * (buffer(i) - Head) + Random.nextInt(2) + 1)
+    }
+    buffer.toArray
+  }
+  private def Linear_Recurrence_Array(Pc_Array: Array[Int], Range: Int, Head: Int): Array[Int] = {
+    var Out_Array: Array[Int] = Array[Int](Pc_Array.length)
+    val Pc: Int = 0
+    var RandomInt: Int = 0
+    for (Pc <- Pc_Array) {
+      RandomInt = Random.nextInt(Range) - Range / 2 + Pc + Head
+      if (RandomInt < 0) {
+        Out_Array = Out_Array :+ 0
+      } else {
+        Out_Array = Out_Array :+ RandomInt
+      }
+    }
+    Out_Array
+  }
   private def Produce_Array(Control: Int): Array[Int] = {
     Control match {
       case 0 => Sequential_pattern(64)
       case 1 => Strided_pattern(64, 192, 2)
       case 2 => Interleaved_Pattern(Strided_pattern(0, 128, 2), Strided_pattern(52, 500, 7))
       case 3 => RandomArray(64, 0, 128)
+      case 4 => Linear_Recurrence_Array(Sequential_pattern(64), 3, 0)
+      case 5 => Tree_Array(16, 0)
+      case _ => Array.fill(65)(0)
     }
   }
-
-  def DoingTest(Times: Int, Control: Int): Unit = {
-    print("MarkovPrefetcher:Mode :", Control)
-    Array_PC = Produce_Array(Control)
-    Array_Adddress = Produce_Array(Control)
+  def DoingTest(Times: Int, Control_Pc: Int, Control_Ad: Int): Unit = {
+    print("MarkovPrefetcher:Mode :" + Control_Pc + "|" + Control_Ad)
+    PrefetcherDetecter.init()
+    PrefetcherDetecter.incount()
+    Array_PC = Produce_Array(Control_Pc)
+    Array_Adddress = Produce_Array(Control_Ad)
     PrefetcherDetecter.ChangeArray(Array_PC, Array_Adddress)
     PrefetcherDetecter.Tester(Times)
     //PrefetcherDetecter.Output_Table()
     PrefetcherDetecter.print_Result()
-    PrefetcherDetecter.init()
-    PrefetcherDetecter.incount()
+  }
+  def Main(Times:Int,Control_Pc:Int,Control_ad:Int):Unit = {
+    val Record_File = new File("Record_MarkovPrefetcher.txt")
+    val Writer = new BufferedWriter(new FileWriter(Record_File))
+    DoingTest(Times, Control_Pc, Control_ad)
+    Writer.write(PrefetcherDetecter.Table)
+    Writer.flush()
+  }
+  def pr(Control_Pc:Int,Control_ad:Int):String= {
+    PrefetcherDetecter.PRINT(Control_Pc,Control_ad)
   }
 
-
+  Main(Times,Control_Pc,Control_ad)
+}
+class T_RememberStridePrefetcherTester(dut:RememberStridePrefetcher,Times:Int,Control_Pc:Int,Control_ad:Int)extends PeekPokeTester(dut){
   private var Array_PC = Produce_Array(0)
   private var Array_Adddress = Produce_Array(0)
   private val PrefetcherDetecter: PrefetcherDetecter = new PrefetcherDetecter(Array_PC, Array_Adddress)
-  val Record_File = new File("Record_MarkovPrefetcher.txt")
-  val Writer = new FileWriter(Record_File,false)
-  DoingTest(2, 0)
-  DoingTest(2, 1)
-  DoingTest(2, 2)
-  DoingTest(3, 3)
-  Writer.write(PrefetcherDetecter.Table)
-}
-class T_RememberStridePrefetcherTester(dut:RememberStridePrefetcher)extends PeekPokeTester(dut){
   private class PrefetcherDetecter(Input_PC: Array[Int], Input_Address: Array[Int]) {
     private var Undetected_Array = Input_PC.zip(Input_Address)
     private var prefetch_address: BigInt = 0
@@ -305,7 +364,6 @@ class T_RememberStridePrefetcherTester(dut:RememberStridePrefetcher)extends Peek
     var Table: String = {
       "|Num|In_address|Pr_address|Pr_vaild|Real_address|Accurate|\n"
     }
-
     def init(): Unit = {
       Undetected_Array = Input_PC.zip(Input_Address)
       prefetch_address = 0
@@ -313,7 +371,6 @@ class T_RememberStridePrefetcherTester(dut:RememberStridePrefetcher)extends Peek
       Current_PC = 0
       Current_Address = 0
     }
-
     def incount(): Unit = {
       Accu_Number = 0
       Fill_Number = 0
@@ -357,6 +414,9 @@ class T_RememberStridePrefetcherTester(dut:RememberStridePrefetcher)extends Peek
         Dectecter()
       }
     }
+    def PRINT(Control_Pc: Int, Control_Ad: Int): String = {
+      ("RemStrPrefetcher:Mode :" + Control_Pc + "|" + Control_Ad) + ("(FILLRATE,ACCURATE)=" + Output_Result + "\n")
+    }
     private def Output_Result: (Double, Double) = {
       (Fillrate,Accurate)
     }
@@ -371,11 +431,9 @@ class T_RememberStridePrefetcherTester(dut:RememberStridePrefetcher)extends Peek
   private def Sequential_pattern(End: Int): Array[Int] = {
     Strided_pattern(0, End, 1)
   }
-
   private def Strided_pattern(Begin: Int, End: Int, Num_Gap: Int): Array[Int] = {
     Range(Begin, End + Num_Gap, Num_Gap).toArray
   }
-
   private def Interleaved_Pattern(Part_Array_1: Array[Int], Part_Array_2: Array[Int]): Array[Int] = {
     val maxLength = math.max(Part_Array_1.length, Part_Array_2.length)
     val pattern = for {
@@ -387,12 +445,10 @@ class T_RememberStridePrefetcherTester(dut:RememberStridePrefetcher)extends Peek
     }
     pattern.flatten.toArray
   }
-
   private def RandomArray(length: Int, minValue: Int, maxValue: Int): Array[Int] = {
     val random = new Random()
     Array.fill(length + 1)(random.nextInt(maxValue - minValue + 1) + minValue)
   }
-
   /*  private def Test_Register(): Unit = {
     print("|   Vaild|  Amount| Purpose|  Origin|Num|\n")
     for (i <- 0 until 128 * 4) {
@@ -403,47 +459,89 @@ class T_RememberStridePrefetcherTester(dut:RememberStridePrefetcher)extends Peek
       }
     }
   }*/
+  private def Tree_Array(Length:Int,Head:Int):Array[Int] = {
+    var buffer = new ArrayBuffer[Int](64)
+    buffer += Head
+    for(i <- 0 until  Length){
+      buffer += (2*(buffer(i) - Head) + Random.nextInt(2) + 1)
+    }
+    buffer.toArray
+  }
+  private def Linear_Recurrence_Array(Pc_Array:Array[Int],Range:Int,Head:Int):Array[Int] = {
+    var Out_Array:Array[Int] = Array[Int](Pc_Array.length)
+    val Pc:Int =0
+    var RandomInt:Int = 0
+    for(Pc <- Pc_Array){
+      RandomInt = Random.nextInt(Range) - Range/2 + Pc + Head
+      if(RandomInt<0){
+        Out_Array = Out_Array :+ 0
+      }else{
+        Out_Array = Out_Array :+ RandomInt
+      }
+    }
+    Out_Array
+  }
   private def Produce_Array(Control: Int): Array[Int] = {
     Control match {
       case 0 => Sequential_pattern(64)
       case 1 => Strided_pattern(64, 192, 2)
       case 2 => Interleaved_Pattern(Strided_pattern(0, 128, 2), Strided_pattern(52, 500, 7))
       case 3 => RandomArray(64, 0, 128)
+      case 4 => Linear_Recurrence_Array(Sequential_pattern(64),3,0)
+      case 5 => Tree_Array(16,0)
+      case _ => Array.fill(65)(0)
     }
   }
-
-  def DoingTest(Times: Int, Control: Int): Unit = {
-    print("RememberPrefetcher:Mode :",Control)
-    Array_PC = Produce_Array(Control)
-    Array_Adddress = Produce_Array(Control)
+  def DoingTest(Times: Int, Control_Pc: Int,Control_Ad:Int): Unit = {
+    PrefetcherDetecter.init()
+    PrefetcherDetecter.incount()
+    print("RememberPrefetcher:Mode :"+Control_Pc+"|"+Control_Ad)
+    Array_PC = Produce_Array(Control_Pc)
+    Array_Adddress = Produce_Array(Control_Ad)
     PrefetcherDetecter.ChangeArray(Array_PC, Array_Adddress)
     PrefetcherDetecter.Tester(Times)
     //PrefetcherDetecter.Output_Table()
     PrefetcherDetecter.print_Result()
-    PrefetcherDetecter.init()
-    PrefetcherDetecter.incount()
   }
-
-
-  private var Array_PC = Produce_Array(0)
-  private var Array_Adddress = Produce_Array(0)
-  private val PrefetcherDetecter: PrefetcherDetecter = new PrefetcherDetecter(Array_PC, Array_Adddress)
-  val Record_File = new File("Record_RememberStridePrefetcher.txt")
-  val Writer = new FileWriter(Record_File,false)
-  DoingTest(2, 0)
-  DoingTest(2, 1)
-  DoingTest(2, 2)
-  DoingTest(3, 3)
-  Writer.write(PrefetcherDetecter.Table)
+  def Main(Times: Int,Control_Pc:Int,Control_ad:Int): Unit = {
+    val Record_File = new File("Record_RememberStridePrefetcher.txt")
+    val Writer = new BufferedWriter(new FileWriter(Record_File))
+    DoingTest(Times, Control_Pc, Control_ad)
+    Writer.write(PrefetcherDetecter.Table)
+    Writer.flush()
+  }
+  def pr(Control_Pc:Int,Control_ad:Int):String = {
+    PrefetcherDetecter.PRINT(Control_Pc,Control_ad)
+  }
+  Main(Times, Control_Pc, Control_ad)
 }
 object PrefetcherTester extends App {
-  chisel3.iotesters.Driver.execute(args, () => new StridePrefetcher(32, 32)) {
-    c => new T_StridePrefetcherTester(c)
+  val TIMES:Int =2
+  var Control_Pc:Int = 0
+  val Action_ad:Int = 0
+  val Writer = new BufferedWriter(new FileWriter("Record_Result.txt"))
+  for(Action_ad <-0 until 6) {
+    val a = chisel3.iotesters.Driver.execute(args, () => new StridePrefetcher(32, 32)) {
+      c => {
+        /*val tester = new T_StridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        Writer.write(tester.pr(Control_Pc, Action_ad))*/
+        new T_StridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+      }
+    }
+    chisel3.iotesters.Driver.execute(args, () => new MarkovPrefetcher(32, 32)) {
+      c => {
+/*        val tester = new T_MarkovPrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        Writer.write(tester.pr(Control_Pc, Action_ad))*/
+        new T_MarkovPrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+      }
+    }
+    chisel3.iotesters.Driver.execute(args, () => new RememberStridePrefetcher(32, 32)) {
+      c => {
+/*        val tester = new T_RememberStridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        Writer.write(tester.pr(Control_Pc, Action_ad))*/
+        new T_RememberStridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+      }
+    }
   }
-  chisel3.iotesters.Driver.execute(args, () => new MarkovPrefetcher(32, 32)) {
-    c => new T_MarkovPrefetcherTester(c)
-  }
-  chisel3.iotesters.Driver.execute(args, () => new RememberStridePrefetcher(32, 32)) {
-    c => new T_RememberStridePrefetcherTester(c)
-  }
+  Writer.flush()
 }
