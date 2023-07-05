@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="os-lib_2.12-0.8.01">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/bg-jobs/sbt_6561d9a8/target/f6a266aa/f78ecfdb/os-lib_2.12-0.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

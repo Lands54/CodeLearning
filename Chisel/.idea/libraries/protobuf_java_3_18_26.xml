@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="protobuf-java-3.18.26">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/bg-jobs/sbt_2fcfc4c4/target/cdaa0439/8ace6146/protobuf-java-3.18.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

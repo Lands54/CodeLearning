@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="snakeyaml-1.26">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/bg-jobs/sbt_2d015d00/target/71dca960/9a380650/snakeyaml-1.26.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

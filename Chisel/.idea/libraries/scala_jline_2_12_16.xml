@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="scala-jline-2.12.16">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/bg-jobs/sbt_2d015d00/target/0255d10d/aea28bdf/scala-jline-2.12.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

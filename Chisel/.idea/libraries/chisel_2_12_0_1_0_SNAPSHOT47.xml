@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="chisel_2.12-0.1.0-SNAPSHOT47">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/scala-2.12/chisel_2.12-0.1.0-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="joda-time-2.10.15">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/bg-jobs/sbt_6561d9a8/target/04b9666f/438dac88/joda-time-2.10.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jansi-1.114">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/target/bg-jobs/sbt_2d015d00/target/9c6c7c32/bd023609/jansi-1.11.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
