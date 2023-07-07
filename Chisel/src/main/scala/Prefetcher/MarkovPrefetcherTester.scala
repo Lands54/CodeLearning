@@ -102,8 +102,8 @@ class MarkovPrefetcherTester(dut:MarkovPrefetcher)extends PeekPokeTester(dut) {
     Control match {
       case 0 => Sequential_pattern(64)
       case 1 => Strided_pattern(64, 192, 2)
-      case 3 => Interleaved_Pattern(Strided_pattern(0, 128, 2), Strided_pattern(52, 500, 7))
-      case 4 => RandomArray(64, 0, 128)
+      case 2 => Interleaved_Pattern(Strided_pattern(0, 128, 2), Strided_pattern(52, 500, 7))
+      case 3 => RandomArray(64, 0, 128)
     }
   }
   def DoingTest(Times:Int,Control:Int):Unit={

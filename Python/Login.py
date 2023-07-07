@@ -1,7 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from time import sleep
-sleep(3)
 account_number = "account"
 password_number = "password"
 site = webdriver.Chrome("D:\EnvironMent\webdriver\chromedriver.exe")

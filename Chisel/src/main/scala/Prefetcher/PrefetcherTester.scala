@@ -2,6 +2,7 @@ package Prefetcher
 import chisel3._
 import chisel3.util._
 import chisel3.iotesters.{ChiselFlatSpec, Driver, PeekPokeTester}
+
 import scala.util.Random
 import java.io._
 import scala.collection.mutable.ArrayBuffer
@@ -468,7 +469,7 @@ class T_RememberStridePrefetcherTester(dut:RememberStridePrefetcher,Times:Int,Co
     buffer.toArray
   }
   private def Linear_Recurrence_Array(Pc_Array:Array[Int],Range:Int,Head:Int):Array[Int] = {
-    var Out_Array:Array[Int] = Array[Int](Pc_Array.length)
+    var Out_Array:Array[Int] = Array[Int]()
     val Pc:Int =0
     var RandomInt:Int = 0
     for(Pc <- Pc_Array){
@@ -516,30 +517,33 @@ class T_RememberStridePrefetcherTester(dut:RememberStridePrefetcher,Times:Int,Co
   Main(Times, Control_Pc, Control_ad)
 }
 object PrefetcherTester extends App {
-  val TIMES:Int =2
+  val TIMES:Int = 10
   var Control_Pc:Int = 0
   val Action_ad:Int = 0
   val Writer = new BufferedWriter(new FileWriter("Record_Result.txt"))
-  for(Action_ad <-0 until 6) {
-    val a = chisel3.iotesters.Driver.execute(args, () => new StridePrefetcher(32, 32)) {
+  for(Action_ad <- 0 until 6) {
+    val tester1 = chisel3.iotesters.Driver.execute(args, () => new StridePrefetcher(32, 32)) {
       c => {
-        /*val tester = new T_StridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
-        Writer.write(tester.pr(Control_Pc, Action_ad))*/
-        new T_StridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        val tester = new T_StridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        Writer.write(tester.pr(Control_Pc, Action_ad))
+        //new T_StridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        tester
       }
     }
-    chisel3.iotesters.Driver.execute(args, () => new MarkovPrefetcher(32, 32)) {
+    val tester2 = chisel3.iotesters.Driver.execute(args, () => new MarkovPrefetcher(32, 32)) {
       c => {
-/*        val tester = new T_MarkovPrefetcherTester(c, TIMES, Control_Pc, Action_ad)
-        Writer.write(tester.pr(Control_Pc, Action_ad))*/
-        new T_MarkovPrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        val tester = new T_MarkovPrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        Writer.write(tester.pr(Control_Pc, Action_ad))
+        //new T_MarkovPrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        tester
       }
     }
-    chisel3.iotesters.Driver.execute(args, () => new RememberStridePrefetcher(32, 32)) {
+    val tester3 = chisel3.iotesters.Driver.execute(args, () => new RememberStridePrefetcher(32, 32)) {
       c => {
-/*        val tester = new T_RememberStridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
-        Writer.write(tester.pr(Control_Pc, Action_ad))*/
-        new T_RememberStridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        val tester = new T_RememberStridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        Writer.write(tester.pr(Control_Pc, Action_ad))
+        //new T_RememberStridePrefetcherTester(c, TIMES, Control_Pc, Action_ad)
+        tester
       }
     }
   }
