@@ -6,7 +6,7 @@
       <option name="reflectiveCalls" value="true" />
       <option name="featureWarnings" value="true" />
       <plugins>
-        <plugin path="C:\Users\qiubo\AppData\Local\Coursier\Cache\v1\https\repo1.maven.org\maven2\edu\berkeley\cs\chisel3-plugin_2.12.13\3.5.6\chisel3-plugin_2.12.13-3.5.6.jar" />
+        <plugin path="$USER_HOME$/Library/Caches/Coursier/v1/https/repo1.maven.org/maven2/edu/berkeley/cs/chisel3-plugin_2.12.13/3.5.6/chisel3-plugin_2.12.13-3.5.6.jar" />
       </plugins>
     </profile>
   </component>

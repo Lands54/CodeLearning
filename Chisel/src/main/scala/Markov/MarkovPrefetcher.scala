@@ -7,7 +7,7 @@ class MarkovPrefetcher(Length:Int,addressWidth:Int)extends Module {
   val io = IO(new MarkovPrefetcherIO(addressWidth))
   val Previous_address = Reg(UInt(addressWidth.W))
   val Register = Reg(Vec(Length,new S_Part(addressWidth)))
-  val Processing_Method = new File_process_method(Register,Length,addressWidth)
+  private val Processing_Method:File_process_method = new File_process_method(Register,Length,addressWidth)
   val prefetch_address = Wire(SInt(addressWidth.W))
   //Main
   Processing_Method.Insert(Previous_address.asSInt,io.Address.asSInt)

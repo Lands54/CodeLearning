@@ -1,8 +1,15 @@
 public class Hello {
     public static void main(String[] args) {
-        System.out.println("Hello,World!");
+        int i;
+        double a = 0.0;
+        for(i =0;i<4;i++){
+            System.out.println(++a);
+        }
     }
-    public static int pr(int a){
-        return 3;
-    }
+}
+
+abstract class Lord_System{
+
+
+
 }

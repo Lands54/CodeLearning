@@ -1,4 +1,5 @@
 #include<bits/stdc++.h>
+#include<stdio.h>
 using namespace std;
 map<int,int>List;
 int Stole(int money,int *a,int num);

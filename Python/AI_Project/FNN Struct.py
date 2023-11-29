@@ -1,5 +1,4 @@
 import random
-
 import numpy as np
 import math
 import matplotlib.pyplot as plt
@@ -90,7 +89,7 @@ class NeuronLayer:
                         inactive_output[i][j] = np.tanh(inactive_output[i][j])
             case _:
                 pass
-        return inactive_output
+        return (inactive_output - inactive_output.mean()) / (inactive_output.std() + 0.01) + 1
 
 
 class FNN:
@@ -156,8 +155,6 @@ class FNN:
         for i in range(max_learning_times):
             self.forward(enter_data)
             self.error_result(purpose_data)
-            if abs(self.output - purpose_data) < purpose_data * max_error:
-                break
             self.back_forward(learning_rate)
             error_list.append(self.error[0][0])
             times_list.append(i)
@@ -167,21 +164,17 @@ class FNN:
 
 
 if __name__ == '__main__':
-    fnn = FNN(3, 4)
+    fnn = FNN(6, 4)
     fnn.change_output_widen(1)
     fnn.mate(1)
     fnn.change_output_sigmoid()
-    for z in range(200000):
+    for z in range(2000):
         data_in = np.array([[random.random()]])
-        purpose = 0
-        if data_in < 0.5:
-            purpose = 0
-        else:
-            purpose = 1
-        fnn.train(20 * data_in, purpose, 0.1, 0.000000000000000000001, 1)
+        purpose = np.sin(6 * data_in)
+        fnn.train(6 * data_in, purpose, 0.01, 0.01, 1)
     data_list = []
     x_list = []
-    for x in np.arange(0.1, 20, 0.01):
+    for x in np.arange(0.1, 20, 0.1):
         data_list.append(fnn.forward([[x]])[0][0])
         x_list.append(x)
     plt.plot(x_list, data_list)
