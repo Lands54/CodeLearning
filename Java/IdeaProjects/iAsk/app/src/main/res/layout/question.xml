@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:context=".MainActivity">
+
+
+
+
+    <ScrollView android:layout_width="match_parent" android:layout_height="match_parent" android:id="@+id/scrollView3">
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                           xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                           xmlns:tools="http://schemas.android.com/tools"
+                                                           android:layout_width="match_parent"
+                                                           android:layout_height="match_parent"
+                                                           tools:context=".MainActivity">
+            <TextView
+                    android:text="\nQuestion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/textview6"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp" android:textSize="24sp"
+                    android:textStyle="bold"/>
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/first_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@id/textview6" android:layout_marginTop="16dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/second_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@+id/first_question"
+                    android:layout_marginTop="33dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/third_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@+id/second_question"
+                    android:layout_marginTop="33dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/forth_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@+id/third_question"
+                    android:layout_marginTop="33dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fifth_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@+id/forth_question"
+                    android:layout_marginTop="33dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/sixth_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@+id/fifth_question"
+                    android:layout_marginTop="33dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/seventh_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@+id/sixth_question"
+                    android:layout_marginTop="33dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/eighth_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@+id/seventh_question"
+                    android:layout_marginTop="33dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ninth_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@+id/eighth_question"
+                    android:layout_marginTop="33dp"/>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/tenth_question"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@+id/ninth_question"
+                    android:layout_marginTop="33dp"/>
+            <TextView
+                    android:text=""
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="4dp" android:textSize="18sp"
+                    android:textStyle="bold" app:layout_constraintTop_toBottomOf="@+id/ninth_question"
+                    android:layout_marginTop="100dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+            android:text="←"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:id="@+id/previous_page"
+            android:textStyle="normal"
+            app:layout_constraintBottom_toBottomOf="parent" android:layout_marginBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="37dp"/>
+
+    <Button
+            android:text="️→"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/next_page"
+            android:textStyle="normal"
+            android:textSize="20dp"
+            android:layout_marginEnd="37dp"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"/>
+
+    <Button
+            android:text="+"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/ask_question"
+            android:textStyle="normal"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+    />
+
+        <Button
+            android:id="@+id/SelfInformation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Information"
+            android:textSize="18dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

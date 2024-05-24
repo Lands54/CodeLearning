@@ -28,7 +28,10 @@ class Node:
         for i in range(16):
             idxn = self.state.index(i)
             idxt = right_state.index(i)
-            self.cost_value += 2 * (abs((idxn // 4) - (idxt // 4)) + abs((idxn % 4) - (idxt % 4)))
+            self.cost_value += 1 * (abs((idxn // 4) - (idxt // 4)) + abs((idxn % 4) - (idxt % 4)))
+        for i, j in zip(right_state, self.state):
+            if i != j:
+                self.cost_value += 1
 
     def expand(self):
         idx = self.state.index(0)
@@ -132,7 +135,8 @@ class a_Star:
 
 if __name__ == '__main__':
     seed = random.randint(0, 10000)
-    initial_node = Node().random_create(50000, seed)
+    seed = 10
+    initial_node = Node().random_create(10000, seed)
     initial_st = initial_node.state
     print("initial state is:")
     initial_node.print_state()
@@ -140,6 +144,7 @@ if __name__ == '__main__':
     result = optim.search()
     print("solution is:")
     print("close node:", len(optim.close_list))
+    print("open node",len(optim.open_list))
     print("number of step:", len(result.frm.split()), "\n", result.frm)
     print("try to rebuild")
     Node(initial_st).do(result.frm)

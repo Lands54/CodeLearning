@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:context=".MainActivity">
+
+
+
+    <Button
+            android:text="&lt;"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/back_page"
+            app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="5dp"
+            app:layout_constraintStart_toStartOf="parent" android:textSize="24sp"/>
+
+
+    <TextView
+            android:text="I want to ask a question !"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textview7"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="68dp" android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
+    />
+
+    <EditText
+            android:text=""
+            android:id="@+id/question_title"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Title" tools:layout_editor_absoluteX="0dp"
+            android:textStyle="bold" android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/textview7"/>
+    <EditText
+            android:text=""
+            android:id="@+id/question_body"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Body" tools:layout_editor_absoluteX="-16dp"
+            android:textStyle="bold" android:layout_marginTop="14dp"
+            app:layout_constraintTop_toBottomOf="@+id/question_title"/>
+
+    <Button
+            android:text="SAVE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/save_question"
+            tools:ignore="MissingConstraints" android:layout_marginTop="68dp"
+            app:layout_constraintTop_toBottomOf="@+id/question_body" app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

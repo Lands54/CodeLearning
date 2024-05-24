@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   tools:context=".MainActivity">
+
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10.126.22.195"
+            android:id="@+id/ip"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp" app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"/>
+
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="link"
+            android:id="@+id/apply"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp" app:layout_constraintStart_toEndOf="@+id/ip"/>
+    <EditText
+            android:id="@+id/port"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9999"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp" app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"/>
+    />
+    <TextView
+            android:text="Welcome to iAsk !"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/textView5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="148dp" android:textSize="24sp"
+            android:textStyle="bold" app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+            android:text=""
+            android:inputType="number"
+            android:id="@+id/accountIN"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:hint="Account"
+            android:textStyle="bold"
+            android:layout_marginTop="35dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            android:layout_marginEnd="15dp" app:layout_constraintEnd_toEndOf="parent"/>
+    <EditText
+            android:text=""
+            android:id="@+id/password"
+            android:layout_width="280dp"
+            android:layout_height="50dp"
+            android:hint="Password"
+            android:textStyle="bold"
+            android:inputType="textPassword"
+            app:layout_constraintTop_toBottomOf="@+id/accountIN" android:layout_marginEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    <TextView
+            android:text="ACCOUNT"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/accountIN"
+            android:id="@+id/textView" android:layout_marginBottom="12dp" android:layout_marginTop="94dp"
+            app:layout_constraintEnd_toStartOf="@+id/accountIN" android:layout_marginEnd="5dp"/>
+
+    <TextView
+            android:text="PASSWORD"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/password"
+            android:layout_marginEnd="5dp" android:layout_marginTop="27dp"
+            app:layout_constraintTop_toBottomOf="@+id/textView"/>
+
+    <Button
+            android:text="Login!"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content" android:id="@+id/save_all"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="56dp" android:textSize="14sp"
+            android:textStyle="bold" android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/password"/>
+
+    <Button
+            android:text="Register"
+            android:layout_width="110dp"
+            android:layout_height="wrap_content" android:id="@+id/register"
+            android:textSize="14sp"
+            android:textStyle="bold" android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@+id/password" android:layout_marginEnd="56dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

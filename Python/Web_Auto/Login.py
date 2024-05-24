@@ -1,21 +1,18 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from time import sleep
-account_number = "account"
-password_number = "password"
-site = webdriver.Chrome("D:\EnvironMent\webdriver\chromedriver.exe")
-site.get("http://10.21.221.98/a79.htm")
-side=site.find_element(By.XPATH,"/html/body/div/div/div[3]/div[1]/div/div[2]/div[1]/div/select/option[2]")
-side.click()
-account=site.find_element(By.XPATH,"/html/body/div/div/div[3]/div[1]/div/div[2]/div[1]/div/form/input[2]")
-account.send_keys(account_number)
-password=site.find_element(By.XPATH,"/html/body/div/div/div[3]/div[1]/div/div[2]/div[1]/div/form/input[3]")
-password.send_keys(password_number,"\n")
-site.get("https://lgn.bjut.edu.cn/")
-account=site.find_element(By.XPATH,"/html/body/div/div/div[2]/form/table/tbody/tr[5]/td[2]/input")
-account.send_keys(account_number)
-password=site.find_element(By.XPATH,"/html/body/div/div/div[2]/form/table/tbody/tr[6]/td[2]/input")
-password.send_keys(password_number,"\n")
-site.quit()
+import math
+import mat
+def dft(x, N):
+    f_list = []
+    for k in  range(10 * N):
+        temp = complex(0, 0)
+        for n in range(N):
+            if n > len(x) - 1:
+                temp += 0
+            else:
+                temp += x[n] * pow(math.e, -1 * complex(0, 1) * math.pi * n * k / N )
+        f_list.append(temp)
+    return f_list
 
+signal = [complex(x, 0) for x in range(1,11)]
+system = [complex(1, 0) for _ in range(5)]
+print(dft(signal, 20))
 

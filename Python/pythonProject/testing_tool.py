@@ -1,5 +1,5 @@
 import yfinance as yf
-nasdaq_data = yf.download('^IXIC', start='2010-01-01', end='2023-10-01')
+nasdaq_data = yf.download('^IXIC', start='2020-01-01', end='2023-10-01')
 your_array = nasdaq_data.Close.values
 sum = 0
 times = 0
