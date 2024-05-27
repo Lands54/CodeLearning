@@ -119,10 +119,11 @@ public class User implements CommenUserAction {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        User user = Client.open("127.0.0.1", 9999);
+        User user = Client.open("127.0.0.1", 3389);
         user.login("1", "1");
-        user.changeIdentity("Teacher");
-        Answer[] answers = QuestionList.get(1).getAnswer(1, 20);
+        user.changeIdentity("Asker");
+        user.changeIdentity("PersonSQL");
+        Client.clientDecoder.commandHandle("watchQuestion", "SELECT * from UserBasic");
         System.out.println();
     }
 

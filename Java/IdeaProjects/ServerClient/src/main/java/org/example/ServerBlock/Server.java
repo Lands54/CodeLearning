@@ -175,7 +175,7 @@ public class Server {
         ByteBuffer byteBuffer = ByteBuffer.allocate(65565);
         //获取发生事件的 用户端
         SelectableChannel tempServer = key.channel();
-        //key to Int 函数负责将事件类型转化为0 1 2 3四整数
+        //key to Int 函数负责将事件类型转化为0 1 2 3四个整数
         switch (keyToInt(key)) {
             case 0:
                 //当服务器收到建立连接事件
@@ -204,7 +204,7 @@ public class Server {
                 //设置非阻塞通信
                 client.configureBlocking(false);
                 //将数据写到字节缓存起
-                client.read(byteBuffer);
+                while (client.read(byteBuffer) > 0);
                 //转化为从字节寄存器中读数据模式
                 byteBuffer.flip();
                 //当对方持续发送空数据，即断开了连接
@@ -257,7 +257,6 @@ public class Server {
                 out.println("Pre:" + data);
                 //byteBuffer Init and put
                 //将命令加入到字节缓冲器
-
                 byteBuffer.put((data + "@END").getBytes(StandardCharsets.UTF_8));
                 byteBuffer.flip();
                 //login register
