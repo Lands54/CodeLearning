@@ -28,12 +28,16 @@ public class ServerCommandHandler implements Runnable{
                 //命令处理进程
                 commandHandle(ir);
                 number++;
+                if (number > 99999)
+                    throw new BigException();
             } catch (NullPointerException e){
                 try {
                     sleep(100);
                 } catch (InterruptedException ex) {
                     throw new RuntimeException(ex);
                 }
+            } catch (BigException e) {
+                number = 0;
             }
         }
     }

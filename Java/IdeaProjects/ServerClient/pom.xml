@@ -8,7 +8,7 @@
     <artifactId>Server</artifactId>
     <version>1.0</version>
 
-    <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
+      <!-- https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc -->
     <dependencies>
         <dependency>
             <groupId>org.xerial</groupId>

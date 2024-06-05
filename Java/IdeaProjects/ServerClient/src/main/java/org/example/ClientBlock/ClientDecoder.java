@@ -24,13 +24,18 @@ class ClientDecoder {
             }
         }
 
-        public String[] commandHandle(String method, String body) {
+        public String[] commandHandle(String method, String body){
             try {
                 this.send(method, body);
                 String rec = this.receive();
                 return regular(rec.substring(0, rec.length() - "@END".length()).split("@"));
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                try{
+                    System.out.println("connect error");
+                    throw new DataException(e);
+                } catch (DataException ex){
+                    throw new RuntimeException(ex);
+                }
             }
         }
 
